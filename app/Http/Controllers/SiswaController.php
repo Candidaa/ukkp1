@@ -15,6 +15,9 @@ class SiswaController extends Controller
     public function index()
     {
         //
+        $siswas = siswa::select('id', 'nis',
+        'nama', 'kelas_id')->get();
+        return view('siswa.index', compact('siswas'));
     }
 
     /**
@@ -25,6 +28,8 @@ class SiswaController extends Controller
     public function create()
     {
         //
+        $siswas = siswa::all();
+        return view('siswa.create', compact('siswas'));
     }
 
     /**
@@ -36,6 +41,26 @@ class SiswaController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'nisn' => 'required',
+            'nis' => 'required',
+            'nama' => 'required',
+            'alamat' => 'required',
+            'no_tlp' => 'required',
+            'kelas_id' => 'required',
+            'spps_id' => 'required'
+        ]);
+
+        Siswa::create([
+            'nisn' => $request -> nisn,
+            'nis' => $request -> nis,
+            'nama' => $request -> nama,
+            'alamat' => $request -> alamat,
+            'no_tlp' => $request -> no_tlp,
+            'kelas_id' => $reqreuest -> kelas_id,
+            'spps_id' => $request -> spps_id
+        ]);
+        return redirect()->route('barang.index');
     }
 
     /**
@@ -81,5 +106,6 @@ class SiswaController extends Controller
     public function destroy(siswa $siswa)
     {
         //
+        
     }
 }
