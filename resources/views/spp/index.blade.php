@@ -1,7 +1,7 @@
 @extends('template.master')
 
 @section('judul')
-    <h1>Halaman Siswa</h1>
+    <h1>Halaman Spp</h1>
 @endsection
 
 @section('content')
@@ -15,11 +15,11 @@
               <i class="fas fa-times"></i>
             </button>
           </div>
-      <h3 class="card-title">Data Siswa</h3>
+      <h3 class="card-title">Data Spp</h3>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
-    <a href="{{ route('siswa.create') }}" class="btn btn-primary">
+    <a href="{{ route('spp.create') }}" class="btn btn-primary">
           <i class="fas fa-plus-square"></i>
         Tambah   
         </a>
@@ -30,34 +30,24 @@
         <thead>
         <tr>
           <th>No</th>
-          <th>Nisn</th>
-          <th>Nis</th>
-          <th>Nama</th>
-          <th>Alamat</th>
-          <th>No_Telp</th>
-          <th>Kelas_id</th>
-          <th>Spp_id</th>
+          <th>Tahun</th>
+          <th>Nominal</th>
           <th>Action</th>
         </tr>
         </thead>
         <tbody>
-          @forelse($siswa as $siswa)
+          @forelse($spp as $spp)
          <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ $siswa->nisn }}</td>
-          <td>{{ $siswa->nis }}</td>
-          <td>{{ $siswa->nama }}</td>
-          <td>{{ $siswa->alamat }}</td>
-          <td>{{ $siswa->no_telp }}</td>
-          <td>{{ $siswa->kelas_id }}</td>
-          <td>{{ $siswa->spps_id }}</td>
+          <td>{{ $spp->tahun }}</td>
+          <td>{{ $spp->nominal }}</td>
           <td>
-          <form action="{{ route ('siswa.destroy', [$siswa->id])}}" method="POST">
-              <a class="btn btn-info mr-3" href="siswa/{{$siswa->id}}">
+          <form action="{{ route ('spp.destroy', [$spp->id])}}" method="POST">
+              <a class="btn btn-info mr-3" href="spp/{{$spp->id}}">
               <i class="fas fas fa-exclamation-circle"></i> Detail</a> 
-              <a class="btn btn-warning mr-3" href="siswa/{{$siswa->id}}/edit">
+              <a class="btn btn-warning mr-3" href="spp/{{$spp->id}}/edit">
               <i class="fas fa-edit	"></i> Edit</a>
-              <form action="/siswa/{{$siswa->id}}" method="POST">
+              <form action="/spp/{{$spp->id}}" method="POST">
             @csrf
             @method('DELETE')
            <button type="submit" class="btn btn-danger" value="Delete">

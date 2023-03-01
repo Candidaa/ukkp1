@@ -14,9 +14,9 @@ class siswa extends Model
         'nis',
         'nama',
         'alamat',
-        'no_telpn', 
+        'no_telp', 
         'kelas_id',
-        'spps-id',   
+        'spps_id',   
     ];
 
     public function kelas()

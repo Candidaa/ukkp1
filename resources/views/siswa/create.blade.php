@@ -1,58 +1,68 @@
 @extends('template.master')
 
-@section('judul')
-    <h1>Data</h1>
-@endsection
-
-@section ('content')
-<div class="card card-primary">
+@section('content')
+<div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Add New Data</h3>
+                <h3 class="card-title">Tambah Data Siswa</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="/class" method="POST">
+              <form action="{{ route('siswa.store') }}" method="POST">
                 @csrf
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="inputid">Nisn</label>
-                    <input type="text" name="nisn" class="form-control" placeholder="Nisn">
+                    <label for="input_nisn">NISN</label>
+                    <input type="number" name="nisn" class="form-control" id="input_nisn" placeholder="Silahkan Masukan Nisn">
                   </div>
                   <div class="form-group">
-                    <label for="inputNamaKelas">Nis</label>
-                    <input type="text" name="nis" class="form-control" placeholder="Nis">
+                    <label for="input_nis">NIS</label>
+                    <input type="number" name="nis" class="form-control" id="input_nis" placeholder="Silahkan Masukan Nis">
+                </div>
+                  <div class="form-group">
+                    <label for="input_nama">Nama</label>
+                    <input type="text"  name="nama" class="form-control" id="input_nama" placeholder="Silahkan Masukan Nama">
+                </div>
+                  <div class="form-group">
+                    <label for="input_alamat">Alamat</label>
+                    <input type="text" name="alamat" class="form-control" id="input_alamat" placeholder="Silahkan Masukan Alamat">
+                </div>
+                  <div class="form-group">
+                    <label for="input_no_telp">No_Telp</label>
+                    <input type="number" name="no_telp" class="form-control" id="input_no_telp" placeholder="Enter No Telp">
+                </div>
+                  <div class="form-group">
+                  <label>Nama Kelas</label>
+                <select class="form-control" name="kelas_id" id="kelas_id">
+                    <option disable selected> --Silahkan Pilih Kelas-- </option>
+                  @forelse( $kelas as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_kelas }}</option>
+                  @empty
+                    <option value="" disabled>Data Masih Kosong</option>
+                  @endforelse
+                </select>
+                  @error('kelas_id')
+                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                  @enderror
                   </div>
                   <div class="form-group">
-                    <label for="inputJurusan">Nama</label>
-                    <input type="text" name="nama" class="form-control" placeholder="Nama">
-                  </div>
-                  <div class="form-group">
-                    <label for="inputJurusan">Alamat</label>
-                    <input type="text" name="alamat" class="form-control" placeholder="Alamat">
-                  </div>  
-                  <div class="form-group">
-                    <label for="inputJurusan">No_telp</label>
-                    <input type="number" name="no_telp" class="form-control" placeholder="No_telp">
-                  </div>
-                  <div class="form-group">
-                    <label>Pilih Kelas</label>
-                    <select name="kelas_id" id="kelas_id">
-                    <option value="" disabled>Silahkan Pilih Kelas</option>
-                    <option value="XII RPL 3">XII RPL 3</option>
-                    <option value="XII RPL 2">XII RPL 2</option>
-                    <option value="XII RPL 1">XII RPL 1</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label>Jumlah Nominal</label>
-                      <select name="spps_id" id="spps_id">
-                      <option value="" disabled>Silahkan Pilih Nominal</option>
-                      <option value="2jt">2000000</option>
-                      <option value="3jt">300000</option>
-                      <option value="4jt">4000000</option>
+                  <label>Jumlah Nominal</label>
+                <select class="form-control" name="spps_id" id="spps_id">
+                    <option disabled selected>Silahkan Pilih Nominal</option>
+                  @forelse( $spps as $item)
+                    <option value="{{ $item->id }}">{{ $item->nominal }}</option>
+                  @empty
+                    <option value="" disabled>Data Masih Kosong</option>
+                  @endforelse
                  </select>
- 
-
+                  </div>
+                  @error('spps_id')
+                        <div class="alert alert-danger" role="alert">{{ $message }}</div>
+                  @enderror
                 <!-- /.card-body -->
 
                 <div class="card-footer">
@@ -60,8 +70,5 @@
                 </div>
               </form>
             </div>
+            <!-- /.card -->
 @endsection
-            
-
-
-   
